@@ -7,14 +7,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.firebase.firestore.ListenerRegistration
+import com.guendeli.firebasechat.AppConstants
+import com.guendeli.firebasechat.ChatActivity
 
 import com.guendeli.firebasechat.R
+import com.guendeli.firebasechat.recyclerView.item.PersonItem
 import com.guendeli.firebasechat.utils.firestoreUtils
 import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.OnItemClickListener
 import com.xwray.groupie.Section
 import com.xwray.groupie.kotlinandroidextensions.Item
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.fragment_people.*
+import org.jetbrains.anko.support.v4.startActivity
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -51,18 +56,26 @@ class PeopleFragment : Fragment() {
                 adapter = GroupAdapter<ViewHolder>().apply {
                     peopleSection = Section(items)
                     add(peopleSection)
+                    setOnItemClickListener(onItemClick);
                 }
             }
             shouldInitRecyclerView = false;
         }
-        fun updateItems(){
-
-        }
+        fun updateItems() = peopleSection.update(items);
 
         if(shouldInitRecyclerView){
             init();
         } else {
             updateItems();
+        }
+    }
+
+    private val onItemClick = OnItemClickListener{item, view ->
+        if(item is PersonItem){
+            startActivity<ChatActivity>(
+                AppConstants.USER_NAME to item.person.name,
+                AppConstants.USER_ID to item.userId
+            )
         }
     }
 }
