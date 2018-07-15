@@ -7,6 +7,7 @@ import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
 import com.guendeli.firebasechat.modules.ChatChannel
+import com.guendeli.firebasechat.modules.Message
 import com.guendeli.firebasechat.modules.MessageType
 import com.guendeli.firebasechat.modules.TextMessage
 import com.guendeli.firebasechat.modules.User
@@ -120,6 +121,11 @@ object firestoreUtils {
                 }
                 onListen(items)
             }
+    }
+
+    fun sendMessage(message : Message, channelId : String){
+        chatChannelsCollectionRef.document(channelId)
+            .collection("messages").add(message);
     }
 
 }
