@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.request.RequestOptions
 import com.firebase.ui.auth.AuthUI
 import com.google.android.gms.signin.SignIn
 
@@ -108,6 +109,7 @@ class MyAccountFragment : Fragment() {
                 if (!pictureJustChanged && user.profilePicturePath != null) {
                     GlideApp.with(this)
                         .load(storageUtils.pathToReference(user.profilePicturePath))
+                        .apply(RequestOptions().circleCrop())
                         .placeholder(R.drawable.ic_account_circle_black_24dp)
                         .into(imageView_profile_picture)
                 }

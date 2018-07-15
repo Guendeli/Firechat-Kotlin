@@ -1,6 +1,7 @@
 package com.guendeli.firebasechat.recyclerView.item
 
 import android.content.Context
+import com.bumptech.glide.request.RequestOptions
 import com.guendeli.firebasechat.R
 import com.guendeli.firebasechat.glide.GlideApp
 import com.guendeli.firebasechat.modules.User
@@ -17,6 +18,7 @@ class PersonItem(val person : User, val userId : String, private val context : C
         if(person.profilePicturePath != null){
             GlideApp.with(context)
                 .load(storageUtils.pathToReference(person.profilePicturePath))
+                .apply(RequestOptions().circleCrop())
                 .placeholder(R.drawable.ic_account_circle_black_24dp)
                 .into(viewHolder.imageView_profile_picture);
         }
