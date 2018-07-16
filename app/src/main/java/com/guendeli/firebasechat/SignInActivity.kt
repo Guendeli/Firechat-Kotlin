@@ -7,6 +7,8 @@ import android.os.Bundle
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.ErrorCodes
 import com.firebase.ui.auth.IdpResponse
+import com.google.firebase.iid.FirebaseInstanceId
+import com.guendeli.firebasechat.service.MyFirebaseInstanceIDService
 import com.guendeli.firebasechat.utils.firestoreUtils
 import kotlinx.android.synthetic.main.activity_sign_in.*
 import org.jetbrains.anko.clearTask
@@ -46,6 +48,8 @@ class SignInActivity : AppCompatActivity() {
                 val progressDialog = indeterminateProgressDialog("Setting up your Account");
                 firestoreUtils.initCurrentUserIfFirstTime {
                     startActivity(intentFor<MainActivity>().newTask().clearTask());
+                    val registrationToken = FirebaseInstanceId.getInstance().token;
+                    MyFirebaseInstanceIDService.addTokenToFirestore(registrationToken);
                     progressDialog.dismiss();
                 }
             } else if(resultCode == Activity.RESULT_CANCELED){
