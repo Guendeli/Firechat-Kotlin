@@ -9,6 +9,7 @@ import com.xwray.groupie.kotlinandroidextensions.Item
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.item_text_message.*
 import org.jetbrains.anko.backgroundResource
+import org.jetbrains.anko.textColor
 import org.jetbrains.anko.wrapContent
 import java.text.SimpleDateFormat
 
@@ -36,6 +37,7 @@ abstract class MessageItem (private val message : Message) : Item() {
                 val lParams = FrameLayout.LayoutParams(wrapContent, wrapContent, Gravity.START)
                 this.layoutParams = lParams;
             }
+
         }
     }
 }
