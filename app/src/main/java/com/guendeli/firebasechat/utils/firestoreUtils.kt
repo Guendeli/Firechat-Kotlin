@@ -7,10 +7,12 @@ import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
 import com.guendeli.firebasechat.modules.ChatChannel
+import com.guendeli.firebasechat.modules.ImageMessage
 import com.guendeli.firebasechat.modules.Message
 import com.guendeli.firebasechat.modules.MessageType
 import com.guendeli.firebasechat.modules.TextMessage
 import com.guendeli.firebasechat.modules.User
+import com.guendeli.firebasechat.recyclerView.item.ImageMessageItem
 import com.guendeli.firebasechat.recyclerView.item.PersonItem
 import com.guendeli.firebasechat.recyclerView.item.TextMessageItem
 import com.xwray.groupie.kotlinandroidextensions.Item
@@ -116,7 +118,7 @@ object firestoreUtils {
                     if (it["type"] == MessageType.TEXT)
                         items.add(TextMessageItem(it.toObject(TextMessage::class.java)!!, context))
                     else
-                        //items.add(ImageMessageItem(it.toObject(ImageMessage::class.java)!!, context))
+                        items.add(ImageMessageItem(it.toObject(ImageMessage::class.java)!!, context))
                     return@forEach
                 }
                 onListen(items)
