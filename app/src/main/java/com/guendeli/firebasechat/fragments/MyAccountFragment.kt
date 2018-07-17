@@ -94,6 +94,7 @@ class MyAccountFragment : Fragment() {
 
             GlideApp.with(this)
                 .load(selectedImage)
+                .apply(RequestOptions().circleCrop())
                 .into(imageView_profile_picture);
 
             pictureJustChanged = true;

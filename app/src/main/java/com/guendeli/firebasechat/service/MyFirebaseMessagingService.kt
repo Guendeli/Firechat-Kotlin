@@ -9,7 +9,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     override fun onMessageReceived(remoteMessage : RemoteMessage?) {
         if(remoteMessage?.notification != null){
             // TODO : show notification
-            Log.d("FCM", "Message Received" )
+            Log.d("FCM", remoteMessage.data.toString());
         }
     }
 }
